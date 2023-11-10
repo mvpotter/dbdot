@@ -45,7 +45,7 @@ func drawTables(ctx context.Context, txn *sql.Tx, f flags.Flags) (*dot.Graph, er
 	if err != nil {
 		return nil, err
 	}
-	graph, err := draw.ERD(tableAndCols, fks)
+	graph, err := draw.ERD(f.Schema, tableAndCols, fks)
 	if err != nil {
 		return nil, err
 	}

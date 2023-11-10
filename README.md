@@ -56,6 +56,20 @@ dbdot currently supports the following flags:
         comma separated list of tables you want to generate dot file for
 ```
 
+# Docker
+
+Build image
+
+```bash
+docker build -t dbdot .
+```
+
+Launch container
+
+```bash
+docker run dbdot
+```
+
 # TODO
 Here's some features I would like to have for this project:
 * Support connection string. What happens if the user doesn't have access to db?

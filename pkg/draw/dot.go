@@ -7,18 +7,18 @@ import (
 	"github.com/emicklei/dot"
 )
 
-func ERD(tables []models.TableAndColumns, fks []models.ForeignKey) (dot.Graph, error) {
-	g := dot.NewGraph(dot.Directed)
+func ERD(schema string, tables []models.TableAndColumns, fks []models.ForeignKey) (dot.Graph, error) {
+	g := dot.NewGraph(dot.Directed).ID(schema)
 	tableToNode := map[string]dot.Node{}
 	for _, table := range tables {
 		var cols []string
 		for _, col := range table.Columns {
-			cols = append(cols, fmt.Sprintf("<TR><TD>%s</TD><TD>%s</TD></TR>", col.Name, col.DataType))
+			cols = append(cols, fmt.Sprintf("<TR><TD>%s</TD><TD><i>%s</i></TD></TR>", col.Name, col.DataType))
 		}
 		n := g.Node(table.Name).Box()
 		n.Attr("shape", "plaintext")
 		n.Attr("label", dot.Literal(
-			fmt.Sprintf(`<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD colspan="2">%s</TD></TR>%s</TABLE>>`,
+			fmt.Sprintf(`<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0"><TR><TD colspan="2"><b>%s</b></TD></TR>%s</TABLE>>`,
 				table.Name, cols)))
 		tableToNode[table.Name] = n
 	}
