@@ -54,6 +54,7 @@ func Parse() Flags {
 	user := flag.String("user", "", "username of postgres db")
 	askForPass := flag.Bool("W", false, "ask for password")
 	dbname := flag.String("dbname", "", "dbname for which you want to generate dot file")
+	pass := flag.String("dbpass", "", "dbpass database password")
 	sslmode := flag.Bool("sslmode", false, "enable sslmode for postgres db connection")
 	schema := flag.String("schema", "public", "schema name")
 	hostname := flag.String("host", "localhost", "database host")
@@ -63,6 +64,7 @@ func Parse() Flags {
 
 	tempFlags := Flags{
 		dbname:   *dbname,
+		dbpass:   *pass,
 		user:     *user,
 		hostname: *hostname,
 		port:     *port,
